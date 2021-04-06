@@ -6,6 +6,7 @@ use App\Repository\ServiceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * This represents a bank's service
  * @ORM\Entity(repositoryClass=ServiceRepository::class)
  */
 class Service

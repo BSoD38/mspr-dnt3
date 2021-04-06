@@ -6,6 +6,7 @@ use App\Repository\SupplierRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * This entity contains a supplier's information
  * @ORM\Entity(repositoryClass=SupplierRepository::class)
  */
 class Supplier

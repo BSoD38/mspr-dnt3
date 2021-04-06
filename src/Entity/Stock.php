@@ -6,6 +6,7 @@ use App\Repository\StockRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * This entity represents an item's stock
  * @ORM\Entity(repositoryClass=StockRepository::class)
  */
 class Stock
@@ -21,6 +22,11 @@ class Stock
      * @ORM\Column(type="string", length=255)
      */
     private string $item;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private float $price;
 
     /**
      * @ORM\Column(type="integer")
@@ -54,5 +60,25 @@ class Stock
         $this->count = $count;
 
         return $this;
+    }
+
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): Stock
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Calculates the total stock value for the current item
+     */
+    public function calculatePrice(): float
+    {
+        return $this->count * $this->price;
     }
 }
