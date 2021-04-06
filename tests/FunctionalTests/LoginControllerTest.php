@@ -5,7 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class LoginControllerTest extends WebTestCase {
 
-    public function renderTest() {
+    public function testRender() {
         $client = static::createClient();
         $client->request('GET', '/login');
 
