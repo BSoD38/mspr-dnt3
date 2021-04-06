@@ -2,6 +2,9 @@
 
 {% block body %}
     <div class="container-fluid mt-3">
-        <button class="btn btn-success">RH</button>
+        <h2>Création de compte</h2>
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+        {{ form_end(form) }}
     </div>
 {% endblock %}

@@ -34,6 +34,18 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{ path('rh') }}">Financière</a>
                         </li>
+                        {% if app.user %}
+                            <li class="nav-item" style="position: absolute; right: 100px; top: 17px; color: white;">
+                                {{ app.user.username }}
+                            </li>
+                            <li class="nav-item" style="position: absolute; right: 20px; color: white; text-decoration: underline;">
+                                <a class="nav-link active" aria-current="page" href="{{ path('app_logout') }}">Log out</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item" style="position: absolute; right: 20px; color: white; text-decoration: underline;">
+                                <a class="nav-link active" aria-current="page" href="{{ path('app_login') }}">Log in</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
