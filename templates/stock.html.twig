@@ -7,14 +7,14 @@
                 Objet ajouté avec succes !
             </div>
         {% endif %}
-        <h2 class="mb-5">Liste des objets du stock</h2>
-        <table>
+        <h2 class="mb-4">Liste des objets du stock</h2>
+        <table style="margin-left: 30px;">
             <thead style="border-width: 1px;">
                 <tr style="border-width: 1px;">
                     <th style="border-width: 1px;">Nom</th>
-                    <th style="border-width: 1px;">Prix unitaire</th>
-                    <th style="border-width: 1px;">Quantité en réserve</th>
-                    <th style="border-width: 1px;">Action</th>
+                    <th class="p-2" style="border-width: 1px;">Prix unitaire</th>
+                    <th class="p-2" style="border-width: 1px;">Quantité en réserve</th>
+                    <th class="p-2" style="border-width: 1px;">Retirer</th>
                 </tr>
             </thead>
             <tbody style="border-width: 1px;">
@@ -23,15 +23,29 @@
                     <td scope="row" style="border-width: 1px; padding: 5px">{{ stock.item }}</td>
                     <td style="border-width: 1px; text-align: center;">{{ stock.price }} €</td>
                     <td style="border-width: 1px; text-align: center;">{{ stock.count }}</td>
-                    <td style="border-width: 1px; text-align: center;"><i class="bi bi-trash"></i></td>
+                    <td style="border-width: 1px; text-align: center;">
+                        <input id="{{ stock.id }}" class="stock-remove" type="number" min="1" max="{{ stock.count }}" style="width: 70px;"/>
+                        <a id="a{{stock.id}}" href="{{ path('stock_remove', {id: stock.id, number: 0}) }}"><i class="bi bi-trash"></i></a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
 
-        <h2 class="mt-5 mb-5">Ajouter un objet au stock</h2>
-        {{ form_start(form) }}
-            {{ form_widget(form) }}
-        {{ form_end(form) }}
+        <h2 class="mt-5 mb-4">Ajouter un objet au stock</h2>
+        <div style="margin-left: 30px;">
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
     </div>
+
+    <script>
+        $(".stock-remove").change(function() {
+            number = $(this).prop('value');
+            id = $(this).prop('id');
+            url = '/stock/' + id + '/' + number;
+            $("#a"+id).prop('href', url);
+        });
+    </script>
 {% endblock %}

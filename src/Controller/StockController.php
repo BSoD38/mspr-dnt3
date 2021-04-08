@@ -28,6 +28,7 @@ class StockController extends AbstractController {
 
         $form->handleRequest($request);
 
+        $repository = $this->getDoctrine()->getRepository(Stock::class);
         $add = false;
 
         if ($form->isSubmitted() && $form->isValid()){
@@ -35,11 +36,16 @@ class StockController extends AbstractController {
             $em = $this->getDoctrine()->getManager();
 
             $stock = $form->getData();
-            $em->persist($stock);
+            $result = $repository->findOneBy(array('item' => $stock->getItem(), 'price' => $stock->getPrice()));
+            
+            if ($result == null) {
+                $em->persist($stock);
+            } else {
+                $result->setCount($stock->getCount() + $result->getCount());
+            }
             $em->flush();
         }
 
-        $repository = $this->getDoctrine()->getRepository(Stock::class);
         $stocks = $repository->findAll();
 
         return $this->render('stock.html.twig', [
@@ -47,5 +53,25 @@ class StockController extends AbstractController {
             'form' => $form->createView(),
             'add' => $add
         ]);
+    }
+
+    /**
+     * @Route("/stock/{id}/{number}", name="stock_remove")
+     */
+    public function remove($id, $number) {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository(Stock::class);
+        $stock = $repository->find($id);
+
+        if ($stock != null) {
+            if ($stock->getCount() == $number) {
+                $em->remove($stock);
+            } else {
+                $stock->setCount($stock->getCount() - $number);
+            }
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('stock');
     }
 }
