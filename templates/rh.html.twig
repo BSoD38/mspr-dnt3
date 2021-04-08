@@ -2,6 +2,11 @@
 
 {% block body %}
     <div class="container-fluid mt-3">
+        {% if success %}
+            <div class="alert alert-success" role="alert">
+                Compte créé avec succes !
+            </div>
+        {% endif %}
         <h2>Création de compte</h2>
         {{ form_start(form) }}
             {{ form_widget(form) }}

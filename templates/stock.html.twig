@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid mt-3">
+        {% if add %}
+            <div class="alert alert-success" role="alert">
+                Objet ajouté avec succes !
+            </div>
+        {% endif %}
+        <h2 class="mb-5">Liste des objets du stock</h2>
+        <table>
+            <thead style="border-width: 1px;">
+                <tr style="border-width: 1px;">
+                    <th style="border-width: 1px;">Nom</th>
+                    <th style="border-width: 1px;">Prix unitaire</th>
+                    <th style="border-width: 1px;">Quantité en réserve</th>
+                    <th style="border-width: 1px;">Action</th>
+                </tr>
+            </thead>
+            <tbody style="border-width: 1px;">
+            {% for stock in stocks %}
+                <tr style="border-width: 1px;">
+                    <td scope="row" style="border-width: 1px; padding: 5px">{{ stock.item }}</td>
+                    <td style="border-width: 1px; text-align: center;">{{ stock.price }} €</td>
+                    <td style="border-width: 1px; text-align: center;">{{ stock.count }}</td>
+                    <td style="border-width: 1px; text-align: center;"><i class="bi bi-trash"></i></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <h2 class="mt-5 mb-5">Ajouter un objet au stock</h2>
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

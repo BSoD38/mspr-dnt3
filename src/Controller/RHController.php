@@ -33,7 +33,10 @@ class RHController extends AbstractController {
 
         $form->handleRequest($request);
 
+        $success = false;
+
         if ($form->isSubmitted() && $form->isValid()){
+            $success = true;
             $em = $this->getDoctrine()->getManager();
 
             $user = $form->getData();
@@ -44,6 +47,7 @@ class RHController extends AbstractController {
 
         return $this->render('rh.html.twig', [
             'form' => $form->createView(),
+            'success' => $success,
         ]);
     }
 }
