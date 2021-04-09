@@ -33,7 +33,10 @@ class RHController extends AbstractController {
 
         $form->handleRequest($request);
 
+        $success = false;
+
         if ($form->isSubmitted() && $form->isValid()){
+            $success = true;
             $em = $this->getDoctrine()->getManager();
 
             $user = $form->getData();
@@ -42,8 +45,29 @@ class RHController extends AbstractController {
             $em->flush();
         }
 
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $users = $repository->findAll();
+
         return $this->render('rh.html.twig', [
+            'users' => $users,
             'form' => $form->createView(),
+            'success' => $success,
         ]);
+    }
+
+    /**
+     * @Route("/rh/{id}", name="rh_delete")
+     */
+    public function delete($id) {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $user = $repository->find($id);
+
+        if ($user != null) {
+            $em->remove($user);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('rh');
     }
 }

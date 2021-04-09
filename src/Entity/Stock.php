@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\StockRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * This entity represents an item's stock
@@ -25,11 +26,13 @@ class Stock
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Positive
      */
     private float $price;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Positive
      */
     private int $count;
 

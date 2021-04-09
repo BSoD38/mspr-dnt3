@@ -9,7 +9,7 @@ class LoginControllerTest extends WebTestCase {
         $client = static::createClient();
         $client->request('GET', '/login');
 
-        $this->assertResponseIsSuccessful('Response ok');
-        $this->assertStringContainsString('Please sign in', $client->getResponse()->getContent(), 'String ok');
+        $this->assertResponseIsSuccessful();
+        $this->assertStringContainsString('Connectez-vous', $client->getResponse()->getContent());
     }
 }
