@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid mt-3">
+        <h2>Finance</h2>
+        <select id="select">
+            <option value="Mars">Mars</option>
+            <option value="Février">Février</option>
+            <option value="Janvier">Janvier</option>
+            <option value="Décembre">Décembre</option>
+        </select>
+        <div class="mt-5 row" style="margin-left: 30px;">
+            <div class="col-md-4">
+                <table>
+                    <thead style="border-width: 1px;">
+                        <tr style="border-width: 1px;">
+                            <th class="p-2" style="border-width: 1px;">Salarié</th>
+                            <th class="p-2" style="border-width: 1px;">Paye</th>
+                        </tr>
+                    </thead>
+                    <tbody style="border-width: 1px;">
+                        <tr style="border-width: 1px;">
+                            <td class="p-2" style="border-width: 1px;">remy@yahoo.fr</td>
+                            <td id="paye_1" class="p-2" style="border-width: 1px;">1750 €</td>
+                        </tr>
+                        <tr style="border-width: 1px;">
+                            <td class="p-2" style="border-width: 1px;">remy.jacquet@yahoo.fr</td>
+                            <td id="paye_2" class="p-2" style="border-width: 1px;">2340 €</td>
+                        </tr>
+                        <tr style="border-width: 1px;">
+                            <td class="p-2" style="border-width: 1px;"></td>
+                            <td id="total_paye" class="p-2" style="border-width: 1px; background-color: lightgray;">4090 €</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-2" style="margin-top: 40px;">
+                <font size="25">+</font>
+            </div>
+            <div class="col-md-4" style="margin-top: 65px;">
+                Dépense stock : <font id="total_stock" style="font-size: large;">{{ total }} €</font>
+            </div>
+
+            <div style="margin-top: 200px;">
+                <font id="text_mois" style="text-decoration: underline; font-size: x-large; margin-right: 10px; font-weight: bold;">Dépense total du mois de Mars :</font>
+                <font id="total_mois" style="font-size: xx-large; font-weight: bold;">{{ total + 4090 }} €</font>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $("#select").change(function() {
+            switch($(this).prop('value')) {
+                case 'Mars' :
+                    var totalStock = {{ total }};
+                    $("#paye_1").text("1750 €");
+                    $("#paye_2").text("2340 €");
+                    $("#total_paye").text("4090 €");
+                    $("#total_stock").text(totalStock);
+                    $("#text_mois").text("Dépense total du mois de " + $(this).prop('value') + " :");
+                    $("#total_mois").text(4090 + totalStock + "€");
+                    break;
+                case 'Février' :
+                    $("#paye_1").text("1730 €");
+                    $("#paye_2").text("2350 €");
+                    $("#total_paye").text("4080 €");
+                    $("#total_stock").text("120.7 €");
+                    $("#text_mois").text("Dépense total du mois de " + $(this).prop('value') + " :");
+                    $("#total_mois").text("4200.7 €");
+                    break;
+                case 'Janvier' :
+                    $("#paye_1").text("1790 €");
+                    $("#paye_2").text("2220 €");
+                    $("#total_paye").text("4010 €");
+                    $("#total_stock").text("150.3 €");
+                    $("#text_mois").text("Dépense total du mois de " + $(this).prop('value') + " :");
+                    $("#total_mois").text("4160.3 €");
+                    break;
+                case 'Décembre' :
+                    $("#paye_1").text("1740 €");
+                    $("#paye_2").text("2380 €");
+                    $("#total_paye").text("4120 €");
+                    $("#total_stock").text("80.1 €");
+                    $("#text_mois").text("Dépense total du mois de " + $(this).prop('value') + " :");
+                    $("#total_mois").text("4200.1 €");
+                    break;
+            }
+        })
+    </script>
+{% endblock %}
