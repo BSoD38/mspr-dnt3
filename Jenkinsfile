@@ -32,7 +32,7 @@ pipeline {
 
     stage('Archive') {
       steps {
-        archiveArtifacts './*'
+        archiveArtifacts '*'
       }
     }
 
