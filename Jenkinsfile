@@ -2,19 +2,9 @@ pipeline {
   agent any
   stages {
     stage('Dependencies') {
-      parallel {
-        stage('Dependencies') {
-          steps {
-            bat(script: 'composer install', returnStatus: true)
-          }
-        }
-
-        stage('PHPUnit dependencies') {
-          steps {
-            bat 'php bin\\phpunit'
-          }
-        }
-
+      steps {
+        bat(script: 'composer install', returnStatus: true)
+        bat 'php bin\\phpunit'
       }
     }
 
