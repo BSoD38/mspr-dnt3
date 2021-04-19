@@ -9,15 +9,15 @@ pipeline {
 
     stage('Tests') {
       parallel {
-        stage('UnitTest') {
+        stage('UnitTests') {
           steps {
-            bat 'php bin/php-unit tests/UnitTests'
+            bat 'php bin\\phpunit tests\\UnitTests'
           }
         }
 
-        stage('WebTest') {
+        stage('FunctionalTests') {
           steps {
-            bat 'php bin/php-unit tests/FunctionalTests'
+            bat 'php bin\\phpunit tests\\FunctionalTests'
           }
         }
 
