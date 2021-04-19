@@ -2,8 +2,19 @@ pipeline {
   agent any
   stages {
     stage('Dependencies') {
-      steps {
-        bat(script: 'composer install', returnStatus: true)
+      parallel {
+        stage('Dependencies') {
+          steps {
+            bat(script: 'composer install', returnStatus: true)
+          }
+        }
+
+        stage('PHPUnit dependencies') {
+          steps {
+            bat 'php bin\\phpunit'
+          }
+        }
+
       }
     }
 
@@ -32,7 +43,7 @@ pipeline {
 
     stage('Archive') {
       steps {
-        archiveArtifacts '*'
+        archiveArtifacts '**'
       }
     }
 
