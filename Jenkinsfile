@@ -31,9 +31,32 @@ pipeline {
       }
     }
 
-    stage('Archive') {
+    stage('CopyToServer') {
       steps {
-        archiveArtifacts '**'
+        bat 'xcopy . %DNT3_LOC% /s /e /c /y'
+      }
+    }
+
+    stage('ClearCache') {
+      steps {
+        bat 'php %DNT3_LOC%\\bin\\console cache:clear'
+      }
+    }
+
+    stage('UpdateServer') {
+      parallel {
+        stage('MigrateDB') {
+          steps {
+            bat 'php %DNT3_LOC%\\bin\\console d:s:u --force'
+          }
+        }
+
+        stage('InstallAssets') {
+          steps {
+            bat 'php %DNT3_LOC%\\bin\\console assets:install'
+          }
+        }
+
       }
     }
 
