@@ -22,12 +22,29 @@ pipeline {
           }
         }
 
+        stage('Linting') {
+          steps {
+            bat 'php vendor\\bin\\phplint.bat'
+          }
+        }
+
       }
     }
 
-    stage('GenerateDoc') {
-      steps {
-        bat 'doxygen Doxyfile'
+    stage('DocsAndReports') {
+      parallel {
+        stage('GenerateDoc') {
+          steps {
+            bat 'doxygen Doxyfile'
+          }
+        }
+
+        stage('JUnitCheck') {
+          steps {
+            junit 'junit.xml'
+          }
+        }
+
       }
     }
 
