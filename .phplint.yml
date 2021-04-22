@@ -1,0 +1,7 @@
+path: ./
+extensions:
+  - php
+exclude:
+  - vendor
+warning: false
+xml: junit.xml
