@@ -41,7 +41,7 @@ pipeline {
 
         stage('JUnitCheck') {
           steps {
-            junit '*.xml'
+            junit '**/junit.xml'
           }
         }
 
