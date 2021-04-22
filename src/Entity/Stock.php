@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * This entity represents an item's stock
+ * Représente un objet du stock
  * @ORM\Entity(repositoryClass=StockRepository::class)
  */
 class Stock
@@ -20,17 +20,20 @@ class Stock
     private int $id;
 
     /**
+     * Nom de l'objet
      * @ORM\Column(type="string", length=255)
      */
     private string $item;
 
     /**
+     * Prix unitaire de l'objet
      * @ORM\Column(type="float")
      * @Assert\Positive
      */
     private float $price;
 
     /**
+     * Nombre d'objet disponible dans le stock
      * @ORM\Column(type="integer")
      * @Assert\Positive
      */
@@ -78,7 +81,7 @@ class Stock
     }
 
     /**
-     * Calculates the total stock value for the current item
+     * Calcule le prix total d'un objet selon sa quantité et son prix unitaire
      */
     public function calculatePrice(): float
     {

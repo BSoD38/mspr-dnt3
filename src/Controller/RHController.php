@@ -11,15 +11,26 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+/**
+ * Controller de la page des ressources humaines. Cette dernière permet de visualiser les différents comptes utilisateurs, d'en créer ou d'en supprimer
+ */
 class RHController extends AbstractController {
     private $passwordEncoder;
 
+    /**
+     * Constructeur permettant d'initialiser l'encodeur de mot de passe
+     * @param UserPasswordEncoderInterface Interface du service d'encodage de mot de passe
+     */
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
     }
 
     /**
+     * Initialise le formulaire pour la création de nouveau compte utilisateur. Lorsqu'il est valide, encode le mot de passe saisi et enregistre l'entité dans la base de données.
+     * Un message de confirmation est alors affiché pour informer l'utilisateur. L'ensemble des comptes est également récupéré pour pouvoir les afficher.
+     * @param Request requête les données du formulaire
+     * @return Response le twig correspondant à la page des ressources humaines
      * @Route("/rh", name="rh")
      */
     public function index(Request $request): Response {
@@ -56,6 +67,8 @@ class RHController extends AbstractController {
     }
 
     /**
+     * Fonction permettant de supprimer un compte utilisateur de la base de données
+     * @param integer id du compte à supprimer 
      * @Route("/rh/{id}", name="rh_delete")
      */
     public function delete($id) {

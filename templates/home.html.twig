@@ -2,6 +2,50 @@
 
 {% block body %}
     <div class="container-fluid mt-3">
-        <h1>Bonjour</h1>
+        <h1>Bonjour {{ app.user.username }},</h1>
+        <h3 style="margin-left: 15px;">bienvenue dans ce nouveau logiciel ERP développé par l'entreprise EMESPERRE</h3>
+        <div class="row" style="margin-top: 20vh; text-align: center;">
+            <div class="col-md-4">
+                <a href="/rh" class="card" style="box-shadow: black 1px 1px 3px;">
+                    <i class="bi bi-people-fill" style="font-size: 3rem"></i>
+                    <div class="card-body">
+                        <h5 class="card-title">Ressources humaines</h5>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/stock" class="card" style="box-shadow: black 1px 1px 3px;">
+                    <i class="bi bi-credit-card-2-back-fill" style="font-size: 3rem"></i>
+                    <div class="card-body">
+                        <h5 class="card-title">Achats</h5>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/finance" class="card" style="box-shadow: black 1px 1px 3px;">
+                    <i class="bi bi-bar-chart-line-fill" style="font-size: 3rem"></i>
+                    <div class="card-body">
+                        <h5 class="card-title">Finance</h5>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
+
+    <style>
+        .col-md-4 a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .col-md-4 a:hover {
+            color: black;
+            background-color: gray;
+        }
+
+        .col-md-4 {
+            padding-left: 70px;
+            padding-right: 70px;
+        }
+    </style>
 {% endblock %}
