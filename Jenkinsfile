@@ -24,7 +24,7 @@ pipeline {
 
         stage('Linting') {
           steps {
-            bat 'php vendor\\bin\\phplint.bat'
+            bat 'php vendor\\bin\\phplint.bat --xml=junit.xml'
           }
         }
 
