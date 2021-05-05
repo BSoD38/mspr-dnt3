@@ -41,6 +41,7 @@ pipeline {
 
         stage('JUnitCheck') {
           steps {
+            bat 'dir'
             junit '**/junit.xml'
           }
         }
