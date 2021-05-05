@@ -24,7 +24,7 @@ pipeline {
 
         stage('Linting') {
           steps {
-            bat 'php vendor\\bin\\phplint.bat --xml=junit.xml'
+            bat 'vendor\\bin\\phplint.bat'
           }
         }
 
@@ -41,8 +41,7 @@ pipeline {
 
         stage('JUnitCheck') {
           steps {
-            bat 'dir'
-            junit '**/junit.xml'
+            junit 'junit.xml'
           }
         }
 
