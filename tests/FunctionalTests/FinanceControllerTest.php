@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class FinanceControllerTest extends WebTestCase {
 
     /**
-     * Un test permettant de verifier que l'url de la page finance est accessible et qu'elle contient le texte 'Dépense stock'. Il faut simuler une connexion à un compte utilisateur
+     * Un test permettant de verifier que l'url de la page finance est accessible et qu'elle contient le texte 'Dépense total'. Il faut simuler une connexion à un compte utilisateur
      * pour pouvoir accéder à cette url
      */
     public function testRender() {
@@ -21,6 +21,6 @@ class FinanceControllerTest extends WebTestCase {
         $client->request('GET', '/finance');
 
         $this->assertResponseIsSuccessful();
-        $this->assertStringContainsString('Dépense stock', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Dépense total', $client->getResponse()->getContent());
     }
 }
