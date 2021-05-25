@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid mt-3">
+        {% if add %}
+            <div class="alert alert-success" role="alert">
+                Compte créé avec succes !
+            </div>
+        {% endif %}
+        <h2 class="mb-3">Gestion des comptes</h2>
+        <table class="mb-5" style="margin-left: 30px;">
+            <thead style="border-width: 1px;">
+                <tr style="border-width: 1px;">
+                    <th style="border-width: 1px; text-align: center;">Email</th>
+                    <th class="p-2" style="border-width: 1px;">Action</th>
+                </tr>
+            </thead>
+            <tbody style="border-width: 1px;">
+            {% for user in users %}
+                <tr style="border-width: 1px;">
+                    <td class="p-2" style="border-width: 1px;">{{ user.email }}</td>
+                    <td style="border-width: 1px; text-align: center;"><a href="{{ path('account_delete', {id: user.id}) }}"><i class="bi bi-trash"></i></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <h2 class="mb-3">Création de compte</h2>
+        <div style="margin-left: 30px;">
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

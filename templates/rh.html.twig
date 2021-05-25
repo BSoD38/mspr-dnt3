@@ -2,34 +2,93 @@
 
 {% block body %}
     <div class="container-fluid mt-3">
-        {% if success %}
-            <div class="alert alert-success" role="alert">
-                Compte créé avec succes !
-            </div>
-        {% endif %}
-        <h2 class="mb-3">Gestion des clients</h2>
+        <h2 class="mb-3">Gestion des services et des salariés</h2>
         <table class="mb-5" style="margin-left: 30px;">
             <thead style="border-width: 1px;">
                 <tr style="border-width: 1px;">
-                    <th style="border-width: 1px; text-align: center;">Email</th>
-                    <th class="p-2" style="border-width: 1px;">Action</th>
+                    <th style="border-width: 1px; text-align: center;">Services</th>
+                    <th class="p-2" style="border-width: 1px;">Masse salariale</th>
                 </tr>
             </thead>
             <tbody style="border-width: 1px;">
-            {% for user in users %}
                 <tr style="border-width: 1px;">
-                    <td class="p-2" style="border-width: 1px;">{{ user.email }}</td>
-                    <td style="border-width: 1px; text-align: center;"><a href="{{ path('rh_delete', {id: user.id}) }}"><i class="bi bi-trash"></i></a></td>
+                    <td class="p-2" style="border-width: 1px;">Commerciaux</td>
+                    <td style="border-width: 1px; text-align: center;">15</td>
                 </tr>
-            {% endfor %}
+                <tr style="border-width: 1px;">
+                    <td class="p-2" style="border-width: 1px;">Juridique</td>
+                    <td style="border-width: 1px; text-align: center;">6</td>
+                </tr>
+                <tr style="border-width: 1px;">
+                    <td class="p-2" style="border-width: 1px;">Réception</td>
+                    <td style="border-width: 1px; text-align: center;">8</td>
+                </tr>
+                <tr style="border-width: 1px;">
+                    <td class="p-2" style="border-width: 1px;">Informatique</td>
+                    <td style="border-width: 1px; text-align: center;">5</td>
+                </tr>
+                <tr style="border-width: 1px;">
+                    <td class="p-2" style="border-width: 1px;">Sécurité</td>
+                    <td style="border-width: 1px; text-align: center;">6</td>
+                </tr>
             </tbody>
         </table>
+        <button type="button" class="btn btn-success" style="margin-right: 20px;" data-bs-toggle="modal" data-bs-target="#paye_modal">
+            <i class="bi bi-plus-circle" style="font-size: 17px; margin-right: 5px;"></i>Créer une fiche de paye
+        </button>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#contrat_modal">
+            <i class="bi bi-plus-circle" style="font-size: 17px; margin-right: 5px;"></i>Créer un nouveau contrat
+        </button>
 
-        <h2 class="mb-3">Création de compte</h2>
-        <div style="margin-left: 30px;">
-            {{ form_start(form) }}
-                {{ form_widget(form) }}
-            {{ form_end(form) }}
+        <div class="modal fade" id="paye_modal" tabindex="-1" role="dialog" aria-labelledby="payeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="payeModalLabel">Création d'une fiche de paye</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Salarié :
+                        <select>
+                            {% for user in users %}
+                                <option>{{ user.email }}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="btn btn-primary"><i class="bi bi-plus-circle" style="font-size: 17px; margin-right: 5px;"></i>Ajouter un montant</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-success">Générer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="contrat_modal" tabindex="-1" role="dialog" aria-labelledby="contratModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="contratModalLabel">Création d'un nouveau contrat</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Salarié :
+                        <select>
+                            {% for user in users %}
+                                <option>{{ user.email }}</option>
+                            {% endfor %}
+                        </select><br/>
+                        <label style="margin-top: 10px;">Indiquez la paie mensuel :</label>
+                        <input type="number"/>€<br/>
+                        <label style="margin-top: 10px;">Indiquez l'intitulé exact de la mission :</label>
+                        <input type="text"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-success">Générer</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

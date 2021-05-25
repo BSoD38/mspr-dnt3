@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
+ * Représente un compte utilisateur (classe généré automatiquement par symfony)
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  */
@@ -20,11 +21,13 @@ class User implements UserInterface
     private $id;
 
     /**
+     * Email du compte, la connexion est basé sur email
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
 
     /**
+     * Rôles des comptes pour intégrer un système d'administrateur
      * @ORM\Column(type="json")
      */
     private $roles = [];
